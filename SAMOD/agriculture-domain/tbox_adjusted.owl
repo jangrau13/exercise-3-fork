@@ -25,12 +25,14 @@ vann:preferredNamespacePrefix rdf:type owl:AnnotationProperty .
 #################################################################
 
 ###  http://www.w3.org/2002/07/owl#topObjectProperty
-owl:topObjectProperty rdfs:domain was:Section ;
-                      rdfs:range was:CropType .
+owl:topObjectProperty rdfs:domain was:Farm ;
+                      rdfs:range was:Tractor .
 
 
 ###  https://was-course.interactions.ics.unisg.ch/farm-ontology#currentMoistureLevel
 was:currentMoistureLevel rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf owl:topObjectProperty ;
+                         rdf:type owl:FunctionalProperty ;
                          rdfs:domain was:Section ;
                          rdfs:range was:SoilMoisture ;
                          rdfs:comment "inidicates the believed moisture Level in the section. Read by the ReadSoilMoistureAffordance\""@en .
@@ -39,13 +41,33 @@ was:currentMoistureLevel rdf:type owl:ObjectProperty ;
 ###  https://was-course.interactions.ics.unisg.ch/farm-ontology#grows
 was:grows rdf:type owl:ObjectProperty ;
           rdfs:domain was:Section ;
-          rdfs:range was:CropType .
+          rdfs:range was:CropType ;
+          rdfs:comment "tells the type of crop that is growing in a section"@en .
 
 
 ###  https://was-course.interactions.ics.unisg.ch/farm-ontology#requiredMoistureLevel
 was:requiredMoistureLevel rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf owl:topObjectProperty ;
+                          rdf:type owl:FunctionalProperty ;
                           rdfs:domain was:CropType ;
-                          rdfs:range was:SoilMoisture .
+                          rdfs:range was:SoilMoisture ;
+                          rdfs:comment "required Moisture Level of a crop"@en .
+
+
+###  https://www.w3.org/2019/wot/td#containsSection
+<https://www.w3.org/2019/wot/td#containsSection> rdf:type owl:ObjectProperty ;
+                                                 rdfs:subPropertyOf owl:topObjectProperty ;
+                                                 rdfs:domain was:Farm ;
+                                                 rdfs:range was:Section ;
+                                                 rdfs:comment "a farm consists of different sections"@en .
+
+
+###  https://www.w3.org/2019/wot/td#hasCoordinate
+<https://www.w3.org/2019/wot/td#hasCoordinate> rdf:type owl:ObjectProperty ;
+                                               rdfs:subPropertyOf owl:topObjectProperty ;
+                                               rdfs:domain was:Section ;
+                                               rdfs:range was:Coordinates ;
+                                               rdfs:comment "indicates the Coordinate of a section"@en .
 
 
 #################################################################
@@ -55,36 +77,46 @@ was:requiredMoistureLevel rdf:type owl:ObjectProperty ;
 ###  https://was-course.interactions.ics.unisg.ch/farm-ontology#moistureLevel
 was:moistureLevel rdf:type owl:DatatypeProperty ;
                   rdfs:subPropertyOf owl:topDataProperty ;
+                  rdf:type owl:FunctionalProperty ;
                   rdfs:domain was:SoilMoisture ;
-                  rdfs:range xsd:integer .
+                  rdfs:range xsd:integer ;
+                  rdfs:comment "value of moisture"@en .
 
 
 ###  https://was-course.interactions.ics.unisg.ch/farm-ontology#x1
 was:x1 rdf:type owl:DatatypeProperty ;
        rdfs:subPropertyOf owl:topDataProperty ;
+       rdf:type owl:FunctionalProperty ;
        rdfs:domain was:Coordinates ;
-       rdfs:range xsd:integer .
+       rdfs:range xsd:integer ;
+       rdfs:comment "x1 coordinate point in coordinate"@en .
 
 
 ###  https://was-course.interactions.ics.unisg.ch/farm-ontology#x2
 was:x2 rdf:type owl:DatatypeProperty ;
        rdfs:subPropertyOf owl:topDataProperty ;
+       rdf:type owl:FunctionalProperty ;
        rdfs:domain was:Coordinates ;
-       rdfs:range xsd:integer .
+       rdfs:range xsd:integer ;
+       rdfs:comment "x2 coordinate point in coordinate"@en .
 
 
 ###  https://was-course.interactions.ics.unisg.ch/farm-ontology#y1
 was:y1 rdf:type owl:DatatypeProperty ;
        rdfs:subPropertyOf owl:topDataProperty ;
+       rdf:type owl:FunctionalProperty ;
        rdfs:domain was:Coordinates ;
-       rdfs:range xsd:integer .
+       rdfs:range xsd:integer ;
+       rdfs:comment "y1 coordinate point in coordinate"@en .
 
 
 ###  https://was-course.interactions.ics.unisg.ch/farm-ontology#y2
 was:y2 rdf:type owl:DatatypeProperty ;
        rdfs:subPropertyOf owl:topDataProperty ;
+       rdf:type owl:FunctionalProperty ;
        rdfs:domain was:Coordinates ;
-       rdfs:range xsd:integer .
+       rdfs:range xsd:integer ;
+       rdfs:comment "y2 coordinate point in coordinate"@en .
 
 
 #################################################################
@@ -129,6 +161,23 @@ was:SoilMoisture rdf:type owl:Class ;
 ###  https://was-course.interactions.ics.unisg.ch/farm-ontology#Tractor
 was:Tractor rdf:type owl:Class ;
             rdfs:comment "An automotive vehicle that offers affordances to agents for managing a farm."@en .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( was:Coordinates
+                was:CropType
+                was:Farm
+                was:IrrigateAffordance
+                was:ReadSoilMoistureAffordance
+                was:Section
+                was:SoilMoisture
+                was:Tractor
+              )
+] .
 
 
 ###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi

@@ -1,0 +1,52 @@
+PREFIX was: <https://was-course.interactions.ics.unisg.ch/farm-ontology#>
+PREFIX hmas: <https://purl.org/hmas/>
+PREFIX td: <https://www.w3.org/2019/wot/td#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+INSERT {
+    GRAPH <https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-jan#>
+    {
+      ?farm was:containsSection ?section1.
+      ?section1 a was:Section.
+      ?section2 a was:Section.
+      ?section3 a was:Section.
+      ?section4 a was:Section.
+      ?coordinate1 a was:Coordinates.
+      ?coordinate2 a was:Coordinates.
+      ?coordinate3 a was:Coordinates.
+      ?coordinate4 a was:Coordinates.
+      ?section1 was:hasCoordinates ?coordinate1.
+      ?coordinate1 was:x1 "0"^^xsd:integer.
+      ?coordinate1 was:x2 "1"^^xsd:integer.
+      ?coordinate1 was:y1 "0"^^xsd:integer.
+      ?coordinate1 was:y2 "1"^^xsd:integer.
+      ?farm was:containsSection ?section2.
+      ?section2 was:hasCoordinates ?coordinate2.
+      ?coordinate2 was:x1 "0"^^xsd:integer.
+      ?coordinate2 was:x2 "1"^^xsd:integer.
+      ?coordinate2 was:y1 "1"^^xsd:integer.
+      ?coordinate2 was:y2 "2"^^xsd:integer.
+      ?farm was:containsSection ?section3.
+      ?section3 was:hasCoordinates ?coordinate3.
+      ?coordinate3 was:x1 "1"^^xsd:integer.
+      ?coordinate3 was:x2 "2"^^xsd:integer.
+      ?coordinate3 was:y1 "0"^^xsd:integer.
+      ?coordinate3 was:y2 "1"^^xsd:integer.
+      ?farm was:containsSection ?section4.
+      ?section4 was:hasCoordinates ?coordinate4.
+      ?coordinate4 was:x1 "1"^^xsd:integer.
+      ?coordinate4 was:x2 "2"^^xsd:integer.
+      ?coordinate4 was:y1 "1"^^xsd:integer.
+      ?coordinate4 was:y2 "2"^^xsd:integer.
+    }.
+} WHERE {
+    ?farm a was:Farm.
+   BIND(IRI(CONCAT("https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-jan#section1-", strUUID())) AS ?section1) 
+   BIND(IRI(CONCAT("https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-jan#section2-", strUUID())) AS ?section2) 
+   BIND(IRI(CONCAT("https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-jan#section3-", strUUID())) AS ?section3) 
+   BIND(IRI(CONCAT("https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-jan#section4-", strUUID())) AS ?section4) 
+   BIND(IRI(CONCAT("https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-jan#coordinate1-", strUUID())) AS ?coordinate1) 
+   BIND(IRI(CONCAT("https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-jan#coordinate2-", strUUID())) AS ?coordinate2) 
+   BIND(IRI(CONCAT("https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-jan#coordinate3-", strUUID())) AS ?coordinate3) 
+   BIND(IRI(CONCAT("https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-jan#coordinate4-", strUUID())) AS ?coordinate4) 
+}

@@ -1,0 +1,14 @@
+## Glossary of terms
+- **Farm**: A plot of land devoted to the growing of crops.
+- **Tractor**: An automotive vehicle that offers affordances to agents for managing a farm.
+- **ReadSoilMoistureAffordance**: An affordance offerred by the environment to agents for reading the moisture level of soil.
+- **IrrigateAffordance**: An affordance offerred by the environment to agents for irrigating the soil.
+- **Coordinates**: A set of 4 coordinates [X1,Y1,X2,Y2] that define the opposite corners of a square section at points [X1,Y1] and [X2,Y2].
+- **SoilMoisture**: The level of moisture in soil.
+- **Section**: Sub-parts of a farm, where an individual crop type can be grown
+- **CropType**: type of crop
+- **requiredMoistureLevel**: The required moisture level for a crop type
+- **grows**: kind of crop type that is growing in a section
+- **hasTractor**: tractors in a farm, this would be a property as well, but the A-Box example uses a HMAS property for it. This is why the HMAS property will be used for now.
+- **containsSection**: a farm consists of several sections
+- **hasCoordinates**: a section has coordinates

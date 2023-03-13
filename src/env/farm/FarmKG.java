@@ -28,8 +28,8 @@ import com.google.gson.JsonObject;
 
 public class FarmKG extends Artifact {
 
-    private static final String USERNAME = "danai";
-    private static final String PASSWORD = "was";
+    private static final String USERNAME = "was-students";
+    private static final String PASSWORD = "knowledge-representation-is-fun";
 
     private String repoLocation;
 
@@ -133,8 +133,37 @@ public class FarmKG extends Artifact {
     @OPERATION
     public void queryFarmSections(String farm, OpFeedbackParam<Object[]> sections) {
         // the variable where we will store the result to be returned to the agent
-        Object[] sectionsValue = new Object[]{ "fakeSection1", "fakeSection2", "fakeSection3", "fakeSection4" };
+        Object[] sectionsValue = new Object[] { "fakeSection1", "fakeSection2", "fakeSection3", "fakeSection4" };
+        String tdValue = null; 
 
+        // sets your variable name for the farm to be queried
+        String tdVariableName = "section";
+
+        // constructs query
+        String queryStr = PREFIXES + "SELECT ?section  WHERE {\n" + 
+                "<" + farm + "> was:containsSection ?section.\n";
+
+        // executes query
+        JsonArray sectionList = executeQuery(queryStr);
+
+        /* Example JSON result
+         * [{"td":
+         *  {
+         *   "type":"uri",
+         *   "value":"https://raw.githubusercontent.com/Interactions-HSG/example-tds/was/tds/tractor1.ttl"
+         *  }
+         * }]
+         */
+        var i = 0;
+        while (sectionList.iterator().hasNext()) {
+            JsonObject entry = sectionList.iterator().next().getAsJsonObject();
+            JsonObject sectionObject = entry.getAsJsonObject(tdVariableName);
+            var section = sectionObject.getAsJsonPrimitive("value");
+            System.out.println(section);
+            sectionsValue[i] = section;
+            i += 1;
+        }
+        
         // sets the value of interest to the OpFeedbackParam
         sections.set(sectionsValue);
     }
@@ -142,7 +171,11 @@ public class FarmKG extends Artifact {
     @OPERATION
     public void querySectionCoordinates(String section, OpFeedbackParam<Object[]> coordinates) {
         // the variable where we will store the result to be returned to the agent
-        Object[] coordinatesValue = new Object[]{ 0, 0, 1, 1 };
+        Object[] coordinatesValue = new Object[] { 0, 0, 1, 1 };
+        // sets your variable name for the farm to be queried
+        String tdVariableName = "section";
+
+
 
         // sets the value of interest to the OpFeedbackParam
         coordinates.set(coordinatesValue);

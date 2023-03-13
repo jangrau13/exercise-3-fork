@@ -1,0 +1,59 @@
+PREFIX was: <https://was-course.interactions.ics.unisg.ch/farm-ontology#>
+PREFIX hmas: <https://purl.org/hmas/>
+PREFIX td: <https://www.w3.org/2019/wot/td#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+INSERT {
+    GRAPH <https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-jan#>
+    {
+      ?farm was:containsSection ?section1.
+      ?crop1 a was:CropType.
+      ?crop2 a was:CropType.
+      ?section1 was:hasCropType ?crop1.
+      ?section2 was:hasCropType ?crop1.
+      ?section3 was:hasCropType ?crop2.
+      ?section4 was:hasCropType ?crop2.
+      ?crop1 was:requiredMoistureLevel ?moistureLevel1.
+      ?moistureLevel1 was:moistureLevel "120"^^xsd:integer.
+      ?crop2 was:requiredMoistureLevel ?moistureLevel2.
+      ?moistureLevel2 was:moistureLevel "80"^^xsd:integer.  
+    }.
+} WHERE {
+    ?farm a was:Farm.
+    ?section1 a was:Section.
+      ?section2 a was:Section.
+      ?section3 a was:Section.
+      ?section4 a was:Section.
+      ?coordinate1 a was:Coordinates.
+      ?coordinate2 a was:Coordinates.
+      ?coordinate3 a was:Coordinates.
+      ?coordinate4 a was:Coordinates.
+      ?section1 was:hasCoordinates ?coordinate1.
+      ?coordinate1 was:x1 "0"^^xsd:integer.
+      ?coordinate1 was:x2 "1"^^xsd:integer.
+      ?coordinate1 was:y1 "0"^^xsd:integer.
+      ?coordinate1 was:y2 "1"^^xsd:integer.
+      ?farm was:containsSection ?section2.
+      ?section2 was:hasCoordinates ?coordinate2.
+      ?coordinate2 was:x1 "0"^^xsd:integer.
+      ?coordinate2 was:x2 "1"^^xsd:integer.
+      ?coordinate2 was:y1 "1"^^xsd:integer.
+      ?coordinate2 was:y2 "2"^^xsd:integer.
+      ?farm was:containsSection ?section3.
+      ?section3 was:hasCoordinates ?coordinate3.
+      ?coordinate3 was:x1 "1"^^xsd:integer.
+      ?coordinate3 was:x2 "2"^^xsd:integer.
+      ?coordinate3 was:y1 "0"^^xsd:integer.
+      ?coordinate3 was:y2 "1"^^xsd:integer.
+      ?farm was:containsSection ?section4.
+      ?section4 was:hasCoordinates ?coordinate4.
+      ?coordinate4 was:x1 "1"^^xsd:integer.
+      ?coordinate4 was:x2 "2"^^xsd:integer.
+      ?coordinate4 was:y1 "1"^^xsd:integer.
+      ?coordinate4 was:y2 "2"^^xsd:integer.
+   BIND(IRI(CONCAT("https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-jan#crop1-", strUUID())) AS ?crop1) 
+    BIND(IRI(CONCAT("https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-jan#moistureLevel1-", strUUID())) AS ?moistureLevel1) 
+   BIND(IRI(CONCAT("https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-jan#crop2-", strUUID())) AS ?crop2) 
+    BIND(IRI(CONCAT("https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-jan#moistureLevel2-", strUUID())) AS ?moistureLevel2) 
+   
+}
